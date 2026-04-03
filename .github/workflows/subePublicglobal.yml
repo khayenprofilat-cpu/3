@@ -1,4 +1,4 @@
-name: RDPbluestakes 05
+name: RDPbluestakes 0
 
 on:
   workflow_dispatch:
@@ -93,25 +93,25 @@ jobs:
       - name: Download BlueStacks 64-bit Android 12
         run: |
           $downloadsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Downloads")
-          gdown "https://drive.google.com/uc?id=18XaRjwGgiP4W4YxorQZ6K2tt8Tczn24K" -O "$downloadsPath\blueInstaller.tar.gz"
+          gdown "https://drive.google.com/uc?id=18XaRjwGgiP4W4YxorQZ6K2tt8Tczn24K" -O "blueInstaller.tar.gz"
           
       - name: Download BlueStacks backup
         env:
           FILE_ID: ${{ secrets.GDRIVE_ID_5 }}
         run: |
           $downloadsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Downloads")
-          gdown --id ${{ env.FILE_ID }} -O "$downloadsPath\bluebackup5.tar.gz"
+          gdown --id ${{ env.FILE_ID }} -O "bluebackup5.tar.gz"
 
       - name: Extract Downloaded Files
         run: |
           $downloadsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Downloads")
-          tar -xvf "$downloadsPath\blueInstaller.tar.gz" -C "$downloadsPath"
-          tar -xvf "$downloadsPath\bluebackup5.tar.gz" -C "$downloadsPath"
+          tar -xvf "blueInstaller.tar.gz"
+          tar -xvf "bluebackup5.tar.gz"
       - name: clean up
         run: |
           $downloadsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Downloads")
-          rm "$downloadsPath\bluebackup5.tar.gz"
-          rm "$downloadsPath\blueInstaller.tar.gz"
+          rm "bluebackup5.tar.gz"
+          rm "blueInstaller.tar.gz"
       - name: Maintain Connection
         run: |
           Write-Host "`n=== RDP ACCESS ==="u
